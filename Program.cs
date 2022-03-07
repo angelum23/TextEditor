@@ -1,16 +1,17 @@
 ﻿using TextEditor;
+
 namespace TextEditor
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Start();
         }
 
         public static void Start()
         {
-            
+            Menu.SwitchFunction(Menu.ChooseFunction());
         }
     }
 }

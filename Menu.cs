@@ -1,4 +1,4 @@
-﻿using TextEditor;
+﻿
 
 namespace TextEditor
 {
@@ -8,7 +8,7 @@ namespace TextEditor
         {
             try
             {
-                Console.WriteLine("What do you want to do?\n1 - Open archive\n2 - Create a new one\n3 - Quit\n");
+                Console.WriteLine("What do you want to do?\n1 - Open archive\n2 - Edit\n3 - Create a new one\n4 - Quit\n");
                 return short.Parse(Console.ReadLine());
             }
             catch (Exception)
@@ -25,9 +25,12 @@ namespace TextEditor
                     Execution.OpenArchive();
                     break;
                 case 2:
-                    Execution.CreateArchive();
+                    Execution.EditArchive();
                     break;
                 case 3:
+                    Execution.CreateArchive();
+                    break;
+                case 4:
                     System.Environment.Exit(0);
                     break;
                 default:

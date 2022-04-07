@@ -8,7 +8,8 @@ namespace TextEditor
         {
             try
             {
-                Console.WriteLine("What do you want to do?\n1 - Open archive\n2 - Edit\n3 - Create a new one\n4 - Quit\n");
+                Console.Clear();
+                Console.WriteLine("What do you want to do?\n1 - Open archive\n2 - Edit\n3 - Create a new one\n4 - Delete archive\n5 - Quit\n");
                 return short.Parse(Console.ReadLine());
             }
             catch (Exception)
@@ -19,24 +20,36 @@ namespace TextEditor
 
         public static void SwitchFunction(int escolha)
         {
-            switch (escolha)
+            try
             {
-                case 1:
-                    Execution.OpenArchive();
-                    break;
-                case 2:
-                    Execution.EditArchive();
-                    break;
-                case 3:
-                    Execution.CreateArchive();
-                    break;
-                case 4:
-                    System.Environment.Exit(0);
-                    break;
-                default:
-                    Console.WriteLine("Invalid value");
-                    break;
+                switch (escolha)
+                {
+                    case 1:
+                        Execution.OpenArchive();
+                        break;
+                    case 2:
+                        Execution.EditArchive();
+                        break;
+                    case 3:
+                        Execution.CreateArchive();
+                        break;
+                    case 4:
+                        Execution.DeleteArchive();
+                        break;
+                    case 5:
+                        System.Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid value");
+                        Execution.ReStart();
+                        break;
 
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                Execution.ReStart();
             }
         }
     }

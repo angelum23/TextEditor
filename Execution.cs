@@ -1,18 +1,26 @@
-﻿
-
-namespace TextEditor
+﻿namespace TextEditor
 {
 	public static class Execution
 	{
 		public static void CreateArchive()
         {
+            Console.Clear();
+            Console.WriteLine("Write the path where the file will be created: ");
+            string path = Console.ReadLine();
 
+            using (var file = new StreamWriter(path))
+            {
+                file.Write("");
+            }
+            Console.WriteLine($"Empty archive has been created sucessfully {path}");
+
+            ReStart();
         }
 
         public static void EditArchive()
         {
             Console.Clear();
-            Console.WriteLine("Digite seu texto abaixo: (ESC para sair)\n");
+            Console.WriteLine("Write your text below: (ESC to stop)\n");
             string text = "";
 
             do
@@ -21,28 +29,62 @@ namespace TextEditor
                 text += Environment.NewLine;
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
 
-            Salvar(text);
+            Save(text);
         }
 
-        private static void Salvar(string text)
+        private static void Save(string text)
         {
             Console.Clear();
-            Console.WriteLine("Qual o caminho para salvar o arquivo?");
-            var path = Console.ReadLine();
+            Console.WriteLine("Write the path to save the file: ");
+            string path = Console.ReadLine();
 
             using(var file = new StreamWriter(path))
             {
                 file.Write(text);
             }
 
-            Console.WriteLine($"Arquivo salvo com sucesso no caminho {path}");
+            Console.WriteLine($"File saved sucessfully in the path {path}");
 
-            Menu.ChooseFunction();
+            ReStart();
+        }
+
+        public static void DeleteArchive()
+        {
+            Console.Clear();
+            Console.WriteLine("Write the path of the file: ");
+            string path = Console.ReadLine();
+            try
+            {
+                File.Delete(path);
+                Console.WriteLine("File deleted sucessfuly!");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error excluding archive: {e}");
+            }
+
+            ReStart();
         }
 
         public static void OpenArchive()
         {
+            Console.Clear();
+            Console.WriteLine("Write the path of the file: ");
+            string path = Console.ReadLine();
+            using (var file = new StreamReader(path))
+            {
+                string text = file.ReadToEnd(); 
+                Console.WriteLine(text);
+            }
 
+            ReStart();
+        }
+
+        public static void ReStart()
+        {
+            Console.ReadKey();
+
+            Program.Start();
         }
     }
 }
